@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Listado Empleados</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	color: #333;
+	margin: 0;
+	padding: 20px;
+}
+
+h1 {
+	text-align: center;
+	color: #4CAF50;
+}
+
+table {
+	width: 100%;
+	margin: 20px 0;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 15px;
+	text-align: center;
+	background-color: #ffffff;
+	border: 1px solid #dddddd;
+	border-radius: 5px;
+}
+
+th {
+	background-color: #4CAF50;
+	color: white;
+}
+
+a {
+	color: #4CAF50;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a:hover {
+	color: #45a049;
+}
+
+.container {
+	max-width: 800px;
+	margin: auto;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	background: #fff;
+	padding: 20px;
+}
+
+.volver-btn {
+	display: inline-block;
+	padding: 10px 20px;
+	margin-top: 20px;
+	font-size: 16px;
+	color: white;
+	background-color: #4CAF50;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background-color 0.3s ease;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Listado Empleados</h1>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>DNI</th>
+					<th>Sexo</th>
+					<th>Categoría</th>
+					<th>Años Trabajados</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="empleado : ${lista}">
+					<td th:text="${empleado.nombre}"></td>
+					<td th:text="${empleado.dni}"></td>
+					<td th:text="${empleado.sexo}"></td>
+					<td th:text="${empleado.categoria}"></td>
+					<td th:text="${empleado.anyos}"></td>
+					<td>
+						<form th:action="@{/eliminar}" method="get">
+							<input type="hidden" th:value="${empleado.dni}" name="dni" />
+							<button type="submit">Eliminar</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<a href="javascript:history.back()" class="volver-btn">Volver</a>
+	</div>
+
+</body>
+</html>
